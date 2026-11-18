@@ -1,0 +1,12 @@
+# dados (contêm dados pessoais de anunciantes; não vão para o repositório)
+*.csv
+
+# modelos treinados pelo AutoGluon (pesados, regeneram-se a correr o notebook)
+AutogluonModels/
+
+# ambiente e ficheiros temporários
+.venv/
+.ipynb_checkpoints/
+__pycache__/
+catboost_info/
+lightning_logs/
