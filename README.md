@@ -1,6 +1,6 @@
 # Previsão de preços de casas em Lisboa
 
-Modelo de machine learning que estima o preço pedido de apartamentos à venda em Lisboa (até cerca de 2,2 M€), treinado com [AutoGluon](https://auto.gluon.ai/) a partir de anúncios do website **idealista**. O modelo prevê diretamente o preço em euros e é treinado para reduzir o erro médio em euros (MAE).
+Modelo de machine learning que estima o preço pedido de apartamentos à venda em Lisboa (até cerca de 2,2 M€), treinado com [AutoGluon](https://auto.gluon.ai/) a partir de anúncios do website **idealista.pt**. O modelo prevê diretamente o preço em euros e é treinado para reduzir o erro médio em euros (MAE).
 
 Todo o projeto está num só notebook, [`house_prices.ipynb`](house_prices.ipynb), que segue as fases de um projeto de ML:
 
@@ -31,6 +31,8 @@ No conjunto de teste (284 casas que o modelo nunca viu):
 | Baseline (€/m² da freguesia × área) | 190 160 € | 23,1% | 18,6% | 269 756 € | 0,59 |
 | **AutoGluon** | **121 041 €** | **14,7%** | **10,6%** | **181 030 €** | **0,82** |
 
+![Preço previsto vs preço real e erro de cada casa no conjunto de teste](imagens/avaliacao_teste.png)
+
 - O AutoGluon reduz o erro médio em euros em 36% face à baseline.
 - Metade das casas tem um erro abaixo de 10,6% (erro mediano).
 - São comparados 6 tipos de modelo: LightGBM, CatBoost, XGBoost, Random Forest, Extra Trees e uma rede neuronal. O notebook mostra as métricas de cada um no teste. O AutoGluon escolhe o modelo final pela validação, durante o treino, sem olhar para o teste. O modelo final, uma combinação dos melhores, é também o melhor no teste; sozinho, o melhor é o CatBoost.
@@ -46,7 +48,7 @@ Cuidados que fazem diferença no resultado:
 
 ## Dados
 
-Anúncios de apartamentos à venda em Lisboa, recolhidos do website idealista: 1 661 anúncios e 453 colunas. Ficam 1 533 casas depois de tirar as repetidas, 1 529 depois de tirar as áreas impossíveis e 1 422 depois de tirar os outliers.
+Anúncios de apartamentos à venda em Lisboa, recolhidos do website idealista.pt em outubro de 2026: 1 661 anúncios e 453 colunas. É uma fotografia do mercado nesse mês. Ficam 1 533 casas depois de tirar as repetidas, 1 529 depois de tirar as áreas impossíveis e 1 422 depois de tirar os outliers.
 
 O CSV **não está no repositório**, porque inclui contactos de anunciantes. Para correr o notebook, coloca o ficheiro na pasta do projeto com o nome `dataset_2026-10-12.csv`.
 
@@ -69,6 +71,7 @@ O treino demora até cerca de 15 minutos num portátil sem GPU. Os modelos de á
 ```
 ├── house_prices.ipynb   # notebook com todas as fases e resultados
 ├── requirements.txt     # dependências com versões fixas
+├── imagens/             # gráficos usados no README
 ├── .gitignore           # ficheiros que não vão para o repositório (dados, modelos treinados)
 └── README.md
 ```
